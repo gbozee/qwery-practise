@@ -1,0 +1,7 @@
+venv/
+.vscode/
+startup.sh
+*pyc
+*__pycache__
+*db
+*sqlite
