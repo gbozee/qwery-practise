@@ -56,32 +56,23 @@
       <th>Date Added</th>
       <th>Actions</th>
     </tr>
+    
   </thead>
   <tbody>
+    {% for list in todos %}
     <tr>
-      <td>Get groceries from the market</td>
-      <td>June 21st, 2017</td>
-      <td>
+      <td>{{list.title}}</td>
+      <td>{{list.date}}</td>
+            <td>
         <a href="{{url_for('home', id=id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-        <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>
+        {% if not list.completed %}
+ <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>
+        {% endif %}
+       
       </td>
     </tr>
-    <tr>
-      <td>Call Mummy</td>
-      <td>June 21st, 2017</td>
-      <td>
-        <a href="{{url_for('home', id=id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-        <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>  
-      </td>
-    </tr>
-    <tr>
-      <td>Update blog post</td>
-      <td>June 21st, 2017</td>
-      <td>
-        <a href="{{url_for('home', id=id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-        <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>  
-      </td>
-    </tr>
+    {% endfor %}
+    
   </tbody>
 </table> 
 
