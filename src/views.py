@@ -1,5 +1,6 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,redirect,request
 from src import app
+from .forms import TodoForm
 
 @app.route('/home')
 def home():
@@ -11,3 +12,11 @@ def home():
     return render_template("home.html",todos=todos)
 
 
+@app.route('/add_todo', methods=['POST', 'GET'])
+def add_todo():
+    form = TodoForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            return redirect('/home')
+    return render_template('add_todo.html', form=form)
+    
