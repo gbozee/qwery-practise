@@ -17,7 +17,6 @@ def add_todo():
     form = TodoForm()
     if request.method == 'POST':
         if form.validate_on_submit():
-            form.save()
             return redirect('/home')
     return render_template('add_todo.html', form=form)
     
