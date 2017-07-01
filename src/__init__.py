@@ -18,3 +18,5 @@ def create_tables():
 
 
 from . import views
+
+views.login_manager.init_app(app)
