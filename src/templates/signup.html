@@ -25,11 +25,13 @@
     {% endif %}
   {% endwith %}
   
-    <form class="form col-md-8 col-md-offset-2" action="{{url_for("login")}}" method="post">
+    <form class="form col-md-8 col-md-offset-2" action="{{url_for("signup")}}" method="post">
         {{ form.csrf_token }}
         {% from "macros.html" import render_field %}
+            {{ render_field(form.username, "username") }}
             {{ render_field(form.email, "email") }}
             {{ render_field(form.password, "password") }}
+            {{ render_field(form.confirm, "confirm") }}
         <div class="form-group">
             <button class="btn btn-block btn-primary" type="submit">Submit</button>
         </div>

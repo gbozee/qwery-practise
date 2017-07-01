@@ -1,24 +1,26 @@
-from flask import Flask,flash,render_template,redirect,request,session, url_for
-from flask_login import LoginManager, login_required, login_user
+from flask import Flask, flash, render_template, redirect, request, session, url_for
+from flask_login import LoginManager, login_required, login_user, logout_user
 from src import app
 from .models import User
-from .forms import TodoForm, LoginForm
+from .forms import TodoForm, LoginForm, SignupForm
 
 login_manager = LoginManager()
 login_manager.login_view = "login"
 
+
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.filter(User.id==user_id)
+    return User.query.filter(User.id == user_id).first()
+
 
 @app.route('/home')
 def home():
-    todos= [
-        {"title": "Want to go out", "date": "June 21st, 2017","completed":False},
-        {"title": "Go to the shop", "date": "June 21st, 2017","completed":True},
-        {"title": "Watch Movies", "date": "June 21st, 2017","completed":False}
+    todos = [
+        {"title": "Want to go out", "date": "June 21st, 2017", "completed": False},
+        {"title": "Go to the shop", "date": "June 21st, 2017", "completed": True},
+        {"title": "Watch Movies", "date": "June 21st, 2017", "completed": False}
     ]
-    return render_template("home.html",todos=todos)
+    return render_template("home.html", todos=todos)
 
 
 @app.route('/add_todo', methods=['POST', 'GET'])
@@ -30,6 +32,7 @@ def add_todo():
             form.save()
             return redirect('/home')
     return render_template('add_todo.html', form=form)
+
 
 @app.route("/login/", methods=['POST', 'GET'])
 def login():
@@ -52,4 +55,10 @@ def logout():
     return redirect(url_for('home'))
 
 
-
+@app.route("/signup/", methods=['POST', 'GET'])
+def signup():
+    form = SignupForm()
+    if form.validate_on_submit():
+        form.save()
+        return redirect('/login')
+    return render_template('signup.html', form=form)
