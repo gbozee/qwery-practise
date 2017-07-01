@@ -24,19 +24,17 @@
   <thead>
     <tr>
       <th>Task</th>
-      <th>Date Added</th>
       <th>Actions</th>
     </tr>
     
   </thead>
   <tbody>
-    {% for list in todos %}
+    {% for todo in todos %}
     <tr>
-      <td>{{list.title}}</td>
-      <td>{{list.date}}</td>
+      <td>{{todo.title}}</td>
             <td>
         <a href="{{url_for('home', id=id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-        {% if not list.completed %}
+        {% if not todo.status %}
  <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>
         {% endif %}
        

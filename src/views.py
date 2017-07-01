@@ -1,14 +1,11 @@
 from flask import Flask,render_template,redirect,request
 from src import app
+from .models import TodoList
 from .forms import TodoForm
 
 @app.route('/home')
 def home():
-    todos= [
-        {"title": "Want to go out", "date": "June 21st, 2017","completed":False},
-        {"title": "Go to the shop", "date": "June 21st, 2017","completed":True},
-        {"title": "Watch Movies", "date": "June 21st, 2017","completed":False}
-    ]
+    todos = TodoList.query.all()
     return render_template("home.html",todos=todos)
 
 
