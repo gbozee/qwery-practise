@@ -21,3 +21,7 @@ class TodoList(SaveMixin,db.Model):
         new_data = TodoList(**kwargs)
         new_data.save()
         return new_data
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
