@@ -21,17 +21,15 @@ def add_todo():
     
 @app.route('/edit_todo/<int:todo_id>', methods=['POST', 'GET'])
 def edit_todo(todo_id):
-    todo = TodoList.query.get(todo_id)
+    todo = TodoList.query.get_or_404(todo_id)
     todo_form = TodoForm(obj=todo)
     if request.method == 'POST':
         if todo_form.validate_on_submit():
             if request.form["btn"] == "Update":
-                todo.title = todo_form.title.data
-                todo.status = todo_form.status.data
-                todo.save()
+                todo_form.update(todo)
                 flash('Your todo has been updated successfully!')
             else:
-                todo.delete()
+                todo_form.delete(todo)
                 flash('Your todo has been deleted successfully!')
             return redirect('/home')
     return render_template('edit_todo.html', form=todo_form, todo=todo)

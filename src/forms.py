@@ -11,3 +11,14 @@ class TodoForm(FlaskForm):
         TodoList.create(title=self.data['title'], 
         status=self.data['status'])
     
+    def update(self, todo):
+        todo.title = self.title.data
+        todo.status = self.status.data
+        todo.save()
+
+    def delete(self, todo):
+        todo.delete()
+
+
+
+
