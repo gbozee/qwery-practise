@@ -3,6 +3,7 @@ from src import app
 from .models import TodoList
 from .forms import TodoForm
 
+@app.route('/')
 @app.route('/home')
 def home():
     todos = TodoList.query.all()
