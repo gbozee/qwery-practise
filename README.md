@@ -1,3 +1,20 @@
+# Qwery To-do List App
+Qwery To-do List App lets you create a list of todos and keep track of your completed and uncompleted tasks. With this app, you can create, edit and delete todos
+
+## Getting Started
+Clone the repository to your local machine
+```
+git clone https://github.com/gbozee/qwery-practise.git
+```
+### Prerequisites
+
+You should have [Python 3.6.1](https://www.python.org/ftp/python/3.6.1/python-3.6.1.exe) installed.
+After installation, install the following dependencies  on your local machine using pip by 
+
+```
+pip install -r requirements/base.txt
+```
+
 # qwery-practice
 
 This project is about applying all that we have learnt in the 6 weeks of learning.
@@ -21,3 +38,4 @@ Also if a user is logged in, The list of todos that show up are only todos that 
 On each todo in the todo list, a link on the todo to go to the detail page.
 
 On the detail page of each todo. The todo detail and a button to mark as completed.
+
