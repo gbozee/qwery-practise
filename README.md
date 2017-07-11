@@ -1,13 +1,5 @@
 # Qwery To-do List App
-Qwery To-do List App lets you create a list of todos and keep track of your completed and uncompleted tasks. With this app, you can create, edit and delete todos.
-
-This project is about applying all that we have learnt in the 6 weeks of learning.
-
-We would be implementing a Todo application which would consist of the following pages
-* A home page that displays the list of todos and a link to add a new todo
-* A add-todo page which is where a todo is added
-* A login page which is where a user can choose to signup/login
-* A detail view for each todo 
+Qwery To-do List App lets you create a list of todos and keep track of your completed and uncompleted tasks. With this app, you can create, edit and delete todos. 
 
 ## Getting Started
 Clone the repository to your local machine
@@ -49,4 +41,10 @@ Also if a user is logged in, The list of todos that show up are only todos that 
 On each todo in the todo list, a link on the todo to go to the detail page.
 
 On the detail page of each todo. The todo detail and a button to mark as completed.
+
+## Contributors
+* [yemisi-o](www.github.com/yemisi-o)
+* [tmosco](www.github.com/tmosco)
+* [gbozee](www.github.com/gbozee)
+* [oagbaneje](www.github.com/oagbaneje)
 
