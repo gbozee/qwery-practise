@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 
 db = SQLAlchemy()
 
@@ -17,7 +18,19 @@ class TodoList(SaveMixin,db.Model):
         return "<TodoList {}>".format(self.title)
 
     @classmethod
-    def create(cls,**kwargs):
+    def create(cls, **kwargs):
         new_data = TodoList(**kwargs)
         new_data.save()
         return new_data
+
+class User(UserMixin, SaveMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String())
+    email = db.Column(db.String(70))
+    password = db.Column(db.String(70))
+
+    @classmethod
+    def create(cls, **kwargs):
+        new_user = User(**kwargs)
+        new_user.save()
+        return new_user
