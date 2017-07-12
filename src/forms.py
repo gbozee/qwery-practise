@@ -2,7 +2,7 @@ from builtins import super
 from flask import flash
 from flask_wtf import FlaskForm
 from .models import TodoList, User
-from wtforms import StringField, SelectField, PasswordField
+from wtforms import StringField, SelectField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms.widgets import TextArea, PasswordInput
 from flask_login import login_user
@@ -10,11 +10,20 @@ from flask_login import login_user
 
 class TodoForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
-    status = SelectField('Status', choices=[('U', 'Undone'), ('D', 'Done')])
+    status = BooleanField('Status')
 
     def save(self):
-        TodoList.create(title=self.data['title'],
-                        status=(True if self.data['status'] == 'D' else False))
+        TodoList.create(title=self.data['title'], 
+        status=self.data['status'])
+    
+    def update(self, todo):
+        todo.title = self.title.data
+        todo.status = self.status.data
+        todo.save()
+
+    def delete(self, todo):
+        todo.delete()
+
 
 
 class LoginForm(FlaskForm):
@@ -70,3 +79,8 @@ class SignupForm(FlaskForm):
     def save(self):
         User.create(username=self.data['username'],
                     email=self.data['email'], password=self.data['password'])
+
+
+
+
+
