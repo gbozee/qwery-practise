@@ -23,6 +23,10 @@ class TodoList(SaveMixin,db.Model):
         new_data.save()
         return new_data
 
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
 class User(UserMixin, SaveMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String())
@@ -34,3 +38,7 @@ class User(UserMixin, SaveMixin, db.Model):
         new_user = User(**kwargs)
         new_user.save()
         return new_user
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
