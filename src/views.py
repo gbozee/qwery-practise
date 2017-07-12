@@ -3,10 +3,13 @@ from src import app
 from .models import TodoList
 from .forms import TodoForm
 
+@app.route('/')
 @app.route('/home')
 def home():
     todos = TodoList.query.all()
-    return render_template("home.html",todos=todos)
+    todos_done = TodoList.query.filter_by(status=True)
+    todos_undone = TodoList.query.filter_by(status=False)
+    return render_template("home.html",todos=todos, todos_done=todos_done, todos_undone=todos_undone)
 
 
 @app.route('/add_todo', methods=['POST', 'GET'])
