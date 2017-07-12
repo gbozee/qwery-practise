@@ -3,11 +3,14 @@ from flask import Flask
 from .models import db
 from flask_migrate import Migrate
 
-BASE_DIR = os.path.dirname(os.path.abspath(__name__))
-database = os.path.join(BASE_DIR, 'database.db')
 app = Flask(__name__, template_folder='templates', static_folder='static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(database)
-app.config["SECRET_KEY"] = "hello"
+
+FLASK_CONFIGURATION  = os.getenv('FLASK_CONFIGURATION', 'settings/local.py')
+app.config.from_pyfile(FLASK_CONFIGURATION)
+
+if FLASK_CONFIGURATION == 'settings/local.py':
+    from flask_debugtoolbar import DebugToolbarExtension
+    DebugToolbarExtension(app)
 
 migrate = Migrate(app, db)
 
