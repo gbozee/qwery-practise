@@ -5,3 +5,9 @@ html, body{
 td {
   width: 100px !important;
 }
+.page-header {
+  margin-top: 80px;
+}
+.title-btn {
+  margin-top: 21px;
+}

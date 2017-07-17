@@ -16,10 +16,12 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/home')
 def home():
+    # Added to pass ToDoForm to the Add ToDo modal on the homepage
+    form = TodoForm()
     todos = TodoList.query.all()
     todos_done = TodoList.query.filter_by(status=True)
     todos_undone = TodoList.query.filter_by(status=False)
-    return render_template("home.html",todos=todos, todos_done=todos_done, todos_undone=todos_undone)
+    return render_template("home.html",todos=todos, todos_done=todos_done, todos_undone=todos_undone, form=form)
 
 
 @app.route('/add_todo', methods=['POST', 'GET'])
