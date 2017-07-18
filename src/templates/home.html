@@ -4,89 +4,130 @@
     <div class="col-lg-8 col-md-7 col-sm-6">
       <h1>Qwery To-Do List</h1>
     </div>
+    <div class="col-lg-4 col-md-5 col-sm-6">
+      <button type="button" class="btn title-btn btn-info" data-toggle="modal" data-target="#myModal">Add Todo</button>
+          <!-- Add ToDo Modal -->
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Add ToDo form-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Add To-Do</h4>
+                </div>
+                <div class="modal-body">
+                  <form class="form-inline" action="{{url_for("add_todo")}}" method="post" name="ToDoForm">
+                      {{ form.csrf_token }}
+                      {% from "macros.html" import render_field %}
+                      {{ render_field(form.title, "title") }}
+                      {{ render_field(form.status, "done") }}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit">Add ToDo</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+    </div>
   </div>
 </div>
 
 <!-- Display flash messages-->
-{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
-<div class="alert alert-dismissible alert-{{ category }}">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>{{ message }}</strong>
-</div>
-{% endfor %} {% endif %} {% endwith %}
+{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} 
+  {% for category, message in messages %}
+    <div class="alert alert-dismissible alert-{{ category }}">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>{{ message }}</strong>
+    </div>
+  {% endfor %} 
+{% endif %} {% endwith %}
 
-<table class="table table-striped table-hover ">
-  <thead>
-    <caption>All Todos</caption>
-    <tr>
-      <th>Task</th>
-      <th>Actions</th>
-    </tr>
+{% if todos == None %}
+  <div class="alert alert-dismissible alert-info">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4>There are currently no to dos in the list</h4>
+    <p>Be the first person to <a href="{{url_for("add_todo")}}" class="alert-link">add a To Do</a>.</p>
+  </div>
 
-  </thead>
-  <tbody>
-    {% for todo in todos %}
-    {% if not todo.status %}
-    <tr>
-      <td>{{todo.title}}</td>
-      <td>
-        <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>        
-        <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>
-      </td>
-    </tr>
-    {% else %}
-    <tr>
-      <td><s>{{todo.title}}</s></td>
-      <td>
-        <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
-      </td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-  </tbody>
-</table>
+{% else %}
 
-<table class="table table-striped table-hover ">
-  <thead>
-    <caption>Uncompleted Todos</caption>
-    <tr>
-      <th>Tasks</th>
-      <th>Actions</th>
-    </tr>
+  <table class="table table-striped table-hover ">
+    <thead>
+      <caption>All Todos</caption>
+      <tr>
+        <th>Task</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in todos %}
+      {% if not todo.status %}
+      <tr>
+        <td>{{todo.title}}</td>
+        <td>
+          <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>        
+          <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td><s>{{todo.title}}</s></td>
+        <td>
+          <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
 
-  </thead>
-  <tbody>
-    {% for todo in todos_undone %}
-    <tr>
-      <td>{{todo.title}}</td>
-      <td>
-        <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>        
-        <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+  <table class="table table-striped table-hover ">
+    <thead>
+      <caption>Uncompleted Todos</caption>
+      <tr>
+        <th>Tasks</th>
+        <th>Actions</th>
+      </tr>
 
-<table class="table table-striped table-hover ">
-  <caption>Completed Todos</caption>
-  <thead>
-    <tr>
-      <th>Task</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for todo in todos_done %}
-    <tr>
-      <td><s>{{todo.title}}</s></td>
-      <td>
-        <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>        
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {% for todo in todos_undone %}
+      <tr>
+        <td>{{todo.title}}</td>
+        <td>
+          <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>        
+          <a href="{{url_for('home', id=id)}}" class="btn btn-success btn-xs" role="button"><span class="glyphicon glyphicon-check"></span> Mark as Done</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <table class="table table-striped table-hover ">
+    <caption>Completed Todos</caption>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in todos_done %}
+      <tr>
+        <td><s>{{todo.title}}</s></td>
+        <td>
+          <a href="{{url_for('edit_todo', todo_id=todo.id)}}" class="btn btn-primary btn-xs" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit</a>        
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endif %}
 <!--{% if pagination %}
     <ul class="pager">
       <li class="disabled"><a href="#">&larr; Previous</a></li>
