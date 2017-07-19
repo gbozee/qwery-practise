@@ -19,7 +19,25 @@ _In production_
 ```
 pip install -r requirements/production.txt
 ```
+### Configuring the Database
+To configure the database, set the environment variables in the bash shell:
 
+_SQLite for Windows_
+```
+export DATABASE_URL='sqlite:///c:/absolute/path/to/database'
+```
+_SQLite for Linux_
+```
+export DATABASE_URL='sqlite:////absolute/path/to/database'
+```
+_Postgresql_
+```
+export postgresql://username:password@hostname/database
+```
+_SQL_
+```
+export mysql://username:password@hostname/database
+```
 ### Running the app
 1. Set the environmental variables using the commands
 ```
