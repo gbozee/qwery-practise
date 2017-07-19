@@ -19,7 +19,25 @@ _In production_
 ```
 pip install -r requirements/production.txt
 ```
+### Configuring the Database
+To configure the database, set the environment variables in the bash shell:
 
+_SQLite for Windows_
+```
+export DATABASE_URL='sqlite:///c:/absolute/path/to/database'
+```
+_SQLite for Linux_
+```
+export DATABASE_URL='sqlite:////absolute/path/to/database'
+```
+_Postgresql_
+```
+export DATABASE_URL='postgresql://username:password@hostname/database'
+```
+_SQL_
+```
+export DATABASE_URL='mysql://username:password@hostname/database'
+```
 ### Running the app
 1. Set the environmental variables using the commands
 ```
@@ -43,8 +61,8 @@ On each todo in the todo list, a link on the todo to go to the detail page.
 On the detail page of each todo. The todo detail and a button to mark as completed.
 
 ## Contributors
-* [yemisi-o](www.github.com/yemisi-o)
-* [tmosco](www.github.com/tmosco)
-* [gbozee](www.github.com/gbozee)
-* [oagbaneje](www.github.com/oagbaneje)
+* [yemisi-o](https://www.github.com/yemisi-o)
+* [tmosco](https://www.github.com/tmosco)
+* [gbozee](https://www.github.com/gbozee)
+* [oagbaneje](https://www.github.com/oagbaneje)
 
