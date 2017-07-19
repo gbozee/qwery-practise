@@ -32,11 +32,11 @@ export DATABASE_URL='sqlite:////absolute/path/to/database'
 ```
 _Postgresql_
 ```
-export postgresql://username:password@hostname/database
+export DATABASE_URL='postgresql://username:password@hostname/database'
 ```
 _SQL_
 ```
-export mysql://username:password@hostname/database
+export DATABASE_URL='mysql://username:password@hostname/database'
 ```
 ### Running the app
 1. Set the environmental variables using the commands
