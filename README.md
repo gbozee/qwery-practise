@@ -43,8 +43,8 @@ On each todo in the todo list, a link on the todo to go to the detail page.
 On the detail page of each todo. The todo detail and a button to mark as completed.
 
 ## Contributors
-* [yemisi-o](www.github.com/yemisi-o)
-* [tmosco](www.github.com/tmosco)
-* [gbozee](www.github.com/gbozee)
-* [oagbaneje](www.github.com/oagbaneje)
+* [yemisi-o](https://www.github.com/yemisi-o)
+* [tmosco](https://www.github.com/tmosco)
+* [gbozee](https://www.github.com/gbozee)
+* [oagbaneje](https://www.github.com/oagbaneje)
 
