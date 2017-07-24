@@ -1,14 +1,52 @@
-# qwery-practice
+# Qwery To-do List App
+Qwery To-do List App lets you create a list of todos and keep track of your completed and uncompleted tasks. With this app, you can create, edit and delete todos. 
 
-This project is about applying all that we have learnt in the 6 weeks of learning.
+## Getting Started
+Clone the repository to your local machine
+```
+git clone https://github.com/gbozee/qwery-practise.git
+```
+### Prerequisites
 
-We would be implementing a Todo application which would consist of the following pages
-* A home page that displays the list of todos and a link to add a new todo
-* A add-todo page which is where a todo is added
-* A login page which is where a user can choose to signup/login
-* A detail view for each todo 
+* You should have [Python 3.6.1](https://www.python.org/ftp/python/3.6.1/python-3.6.1.exe) installed.
+* After installation, install the Flask web framework and other dependencies on your local machine using pip:
 
-Things to not out for.
+_For developers_
+```
+pip install -r requirements/local.txt
+```
+_In production_
+```
+pip install -r requirements/production.txt
+```
+### Configuring the Database
+To configure the database, set the environment variables in the bash shell:
+
+_SQLite for Windows_
+```
+export DATABASE_URL='sqlite:///c:/absolute/path/to/database'
+```
+_SQLite for Linux_
+```
+export DATABASE_URL='sqlite:////absolute/path/to/database'
+```
+_Postgresql_
+```
+export DATABASE_URL='postgresql://username:password@hostname/database'
+```
+_SQL_
+```
+export DATABASE_URL='mysql://username:password@hostname/database'
+```
+### Running the app
+1. Set the environmental variables using the commands
+```
+export FLASK_APP=src/__init__.py
+export FLASK_DEBUG=1
+```
+2. Run the command `flask run` and go to 127.0.0.1:5000 on your web browser if you are running it on your local machine
+
+## Things to work on 
 On the home page, when the user isn't authenticated, A link at the top of the page to login/signup a user
 if a user is already logged in, then instead of the login/signup link, he sees his/her name at the top left of the screen
 
@@ -21,3 +59,10 @@ Also if a user is logged in, The list of todos that show up are only todos that 
 On each todo in the todo list, a link on the todo to go to the detail page.
 
 On the detail page of each todo. The todo detail and a button to mark as completed.
+
+## Contributors
+* [yemisi-o](https://www.github.com/yemisi-o)
+* [tmosco](https://www.github.com/tmosco)
+* [gbozee](https://www.github.com/gbozee)
+* [oagbaneje](https://www.github.com/oagbaneje)
+
