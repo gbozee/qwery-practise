@@ -13,6 +13,7 @@ class TodoList(SaveMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     status = db.Column(db.Boolean)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return "<TodoList {}>".format(self.title)
@@ -32,6 +33,7 @@ class User(UserMixin, SaveMixin, db.Model):
     username = db.Column(db.String())
     email = db.Column(db.String(70))
     password = db.Column(db.String(70))
+    todolists = db.relationship('TodoList', backref='user', lazy='dynamic')
 
     @classmethod
     def create(cls, **kwargs):

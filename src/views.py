@@ -1,5 +1,5 @@
 from flask import Flask, flash, render_template, redirect, request, session, url_for
-from flask_login import LoginManager, login_required, login_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from src import app
 from .models import TodoList, User
 from .forms import TodoForm, LoginForm, SignupForm
@@ -18,7 +18,10 @@ def load_user(user_id):
 def home():
     # Added to pass ToDoForm to the Add ToDo modal on the homepage
     form = TodoForm()
+    
     todos = TodoList.query.all()
+    user = current_user.get_id()
+    user_todos = user.todolists.all()
     todos_done = TodoList.query.filter_by(status=True)
     todos_undone = TodoList.query.filter_by(status=False)
     return render_template("home.html",todos=todos, todos_done=todos_done, todos_undone=todos_undone, form=form)
