@@ -18,13 +18,17 @@ def load_user(user_id):
 def home():
     # Added to pass ToDoForm to the Add ToDo modal on the homepage
     form = TodoForm()
-    
+
     todos = TodoList.query.all()
-    user = current_user.get_id()
-    user_todos = user.todolists.all()
+    user = current_user.get_id()  # you didn't check if the user is logged in
+    user_todos = []
+    if user:
+        # th euser here is a string/integer not a user object
+        user = User.query.get(user)
+        user_todos = user.todolists.all()
     todos_done = TodoList.query.filter_by(status=True)
     todos_undone = TodoList.query.filter_by(status=False)
-    return render_template("home.html",todos=todos, todos_done=todos_done, todos_undone=todos_undone, form=form)
+    return render_template("home.html", todos=todos, todos_done=todos_done, todos_undone=todos_undone, form=form)
 
 
 @app.route('/add_todo', methods=['POST', 'GET'])
@@ -37,6 +41,7 @@ def add_todo():
             flash('Your todo has been added successfully!')
             return redirect('/home')
     return render_template('add_todo.html', form=form)
+
 
 @app.route('/edit_todo/<int:todo_id>', methods=['POST', 'GET'])
 def edit_todo(todo_id):
